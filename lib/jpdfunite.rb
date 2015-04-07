@@ -1,4 +1,5 @@
 require "jpdfunite/version"
+require "shellwords"
 
 module Jpdfunite
 
@@ -7,7 +8,7 @@ module Jpdfunite
     def combine(pdf_outline)
       sans_outline = Tempfile.new("pdfgs")
       sans_outline.close
-      %x[pdfunite #{pdf_outline.path} #{sans_outline.path}]
+      %x[pdfunite #{pdf_outline.path} #{sans_outline.path.shellescape}]
       sans_outline
     end
 
@@ -17,7 +18,7 @@ module Jpdfunite
       pdfmarks.close
       output = Tempfile.new(pdf_outline.title)
       output.close
-      %x[jpdfbookmarks -f -a #{pdfmarks.path} #{sans_outline.path} -o #{output.path}]
+      %x[jpdfbookmarks -f -a #{pdfmarks.path} #{sans_outline.path} -o #{output.path.shellescape}]
       output
     end
 
