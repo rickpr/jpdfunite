@@ -1,5 +1,6 @@
 require "jpdfunite/version"
-require "shellwords"
+require 'shellwords'
+require 'tempfile'
 
 module Jpdfunite
 
