@@ -5,6 +5,11 @@ require 'tempfile'
 module Jpdfunite
 
   class << self
+
+    def create(pdf_outline)
+      sans_outline = combine(pdf_outline)
+      outline(sans_outline, pdf_outline)
+    end
     
     def combine(pdf_outline)
       sans_outline = Tempfile.new("pdfgs")

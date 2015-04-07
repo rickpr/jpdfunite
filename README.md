@@ -38,9 +38,9 @@ section. Here is an example that combines three PDF files into one:
 
 ``` ruby
 require 'jpdfunite'
-file_one = Jpdfunite::PdfFile.new("lab7markup.pdf")
-file_two = Jpdfunite::PdfFile.new("macorm.pdf")
-file_three = Jpdfunite::PdfFile.new("discrete_math_textbook.pdf")
+file_one = Jpdfunite::PdfFile.new("file_one.pdf")
+file_two = Jpdfunite::PdfFile.new("file_two.pdf")
+file_three = Jpdfunite::PdfFile.new("file_three.pdf")
 sec_one = Jpdfunite::Section.new("Section One")
 sec_two = Jpdfunite::Section.new("Section Two")
 document = Jpdfunite::Outline.new("Combined Files")
@@ -49,8 +49,10 @@ sec_one.add_mark(file_two)
 sec_two.add_mark(file_three)
 document.add_mark(sec_one)
 document.add_mark(sec_two)
-outfile = Jpdfunite::combine(document)
-Jpdfunite::outline(outfile, document)
+Jpdfunite.create(document)
+# Or do one at a time
+outfile = Jpdfunite.combine(document)
+Jpdfunite.outline(outfile, document)
 ```
 
 ## Contributing
