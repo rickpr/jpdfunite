@@ -1,6 +1,7 @@
 require "jpdfunite/version"
 require 'shellwords'
 require 'tempfile'
+require 'pathname'
 
 module Jpdfunite
 
@@ -12,7 +13,7 @@ module Jpdfunite
     end
     
     def combine(pdf_outline)
-      sans_outline = Tempfile.new("pdfgs")
+      sans_outline = Tempfile.new(["jpdf", ".pdf"])
       sans_outline.close
       %x[pdfunite #{pdf_outline.path} #{sans_outline.path.shellescape}]
       sans_outline
@@ -86,7 +87,7 @@ class Outline
 
     attr_reader :path, :pages
 
-    def initialize(path, title = path)
+    def initialize(path, title = Pathname.new(path).basename.split(".pdf").first)
       @path = path.shellescape
       super(title)
       get_pages
