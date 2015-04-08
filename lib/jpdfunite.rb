@@ -1,7 +1,6 @@
 require "jpdfunite/version"
 require 'shellwords'
 require 'tempfile'
-require 'pathname'
 
 module Jpdfunite
 
@@ -87,7 +86,7 @@ class Outline
 
     attr_reader :path, :pages
 
-    def initialize(path, title = Pathname.new(path).basename.split(".pdf").first)
+    def initialize(path, title = File.basename(path, ".pdf"))
       @path = path.shellescape
       super(title)
       get_pages
