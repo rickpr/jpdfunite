@@ -22,7 +22,7 @@ module Jpdfunite
       pdfmarks = Tempfile.new("pdfmarks")
       pdfmarks.write pdf_outline.pdfmarks
       pdfmarks.close
-      output = Tempfile.new(pdf_outline.title)
+      output = Tempfile.new([pdf_outline.title, ".pdf"])
       output.close
       %x[jpdfbookmarks -f -a #{pdfmarks.path} #{sans_outline.path} -o '#{output.path}']
       output
